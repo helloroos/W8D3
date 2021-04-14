@@ -42,39 +42,67 @@
 // console.log(fibonacci(6))
 
 
-function deepDup(array) {
-    let new_arr = [];
-    for (let i = 0; i < array.length; i++) {
-        if (Array.isArray(array[i])){
-            new_arr = new_arr.concat(deepDup(array[i]));
-        } else {
-            new_arr.push(array[i]);
-        }
-    }
-    return new_arr
-}
+// function deepDup(array) {
+//     let new_arr = [];
+//     for (let i = 0; i < array.length; i++) {
+//         if (Array.isArray(array[i])){
+//             new_arr = new_arr.concat(deepDup(array[i]));
+//         } else {
+//             new_arr.push(array[i]);
+//         }
+//     }
+//     return new_arr
+// }
 
 
 // console.log(deepDup([[1,2],4,[5,6,7]]))
 // console.log(deepDup([[1],[2,[1,2,33]],4,5]))
 
-function bSearch(array, target) {
-    if (array.length == 0) {
-        return null;
+// function bSearch(array, target) {
+//     if (array.length == 0) {
+//         return null;
+//     }
+//     let mid = Math.floor(array.length/2);
+//     if (array[mid] == target){
+//         return mid
+//     } else if (array[mid] > target){
+//         return bSearch(array.slice(0,mid),target)
+//     } else{
+//         let result = bSearch(array.slice(mid+1), target)
+//         if (!result){
+//             return null
+//         } else {
+//             return mid + 1 + result
+//         }
+//     }
+// }
+
+// console.log(bSearch([1,2,3,4,5,6,7],6))
+
+function mergeSearch(arr) {
+    if (arr.length < 2 ) {
+        return arr;
     }
-    let mid = Math.floor(array.length/2);
-    if (array[mid] == target){
-        return mid
-    } else if (array[mid] > target){
-        return bSearch(array.slice(0,mid),target)
-    } else{
-        let result = bSearch(array.slice(mid+1), target)
-        if (!result){
-            return null
-        } else {
-            return mid + 1 + result
-        }
-    }
+    let mid = Math.floor(arr.length / 2);
+    let left_side = arr.slice(0, mid)
+    let right_side = arr.slice(mid)
+    let left_sorted = mergeSearch(left_side)
+    let right_sorted = mergeSearch(right_side)
+    return merge(left_sorted, right_sorted)
 }
 
-console.log(bSearch([1,2,3,4,5,6,7],6))
+function merge(left, right) {
+    let merged = []
+    while (!(left.length == 0) && !(right.length == 0)) {
+        if (left[0] > right[0]) {
+            merged.push(right.shift)
+        } else {
+            merged.push(left.shift)
+        }
+    }
+    new_arr = merged.concat(left).concat(right)
+    return new_arr
+}
+
+
+console.log(mergeSearch([1, 5, 8, 33, 5, 90]))
