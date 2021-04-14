@@ -26,3 +26,21 @@
 
 // console.log([1, -1, 5, 6, -4, -6].twoSum())
 
+Array.prototype.transpose = function() {
+    let new_width = this.length
+    let new_height = this[0].length
+    // let new_arr = new Array(new_height).fill(new Array(new_width).fill(0))
+    // new_arr[0][1] = 5
+    let new_arr = [] 
+    for (let i = 0; i < new_width; i++) {
+        let new_row = []
+
+        for (let j = 0; j < new_height; j++) {
+            new_row.push(this[j][i])
+        }
+        new_arr.push(new_row)
+    }
+    return new_arr
+}
+
+console.log([[1, 2, 3],[4, 5, 6],[7, 8, 9]].transpose())
