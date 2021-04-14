@@ -57,3 +57,24 @@ function deepDup(array) {
 
 // console.log(deepDup([[1,2],4,[5,6,7]]))
 // console.log(deepDup([[1],[2,[1,2,33]],4,5]))
+
+function bSearch(array, target) {
+    if (array.length == 0) {
+        return null;
+    }
+    let mid = Math.floor(array.length/2);
+    if (array[mid] == target){
+        return mid
+    } else if (array[mid] > target){
+        return bSearch(array.slice(0,mid),target)
+    } else{
+        let result = bSearch(array.slice(mid+1), target)
+        if (!result){
+            return null
+        } else {
+            return mid + 1 + result
+        }
+    }
+}
+
+console.log(bSearch([1,2,3,4,5,6,7],6))
