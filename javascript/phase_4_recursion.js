@@ -27,17 +27,33 @@
 
 // console.log(exponent(5, 3))
 
-function fibonacci(n) {
-    if (n == 1) {
-        return [1]
+// function fibonacci(n) {
+//     if (n == 1) {
+//         return [1]
+//     }
+//     if (n == 2) {
+//         return [1, 1]
+//     }
+//     let prevDigits = fibonacci(n-1)
+//     prevDigits.push((prevDigits[prevDigits.length - 2]) + (prevDigits[prevDigits.length - 1]))
+//     return prevDigits
+// }
+
+// console.log(fibonacci(6))
+
+
+function deepDup(array) {
+    let new_arr = [];
+    for (let i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])){
+            new_arr = new_arr.concat(deepDup(array[i]));
+        } else {
+            new_arr.push(array[i]);
+        }
     }
-    if (n == 2) {
-        return [1, 1]
-    }
-    let prevDigits = fibonacci(n-1)
-    prevDigits.push((prevDigits[prevDigits.length - 2]) + (prevDigits[prevDigits.length - 1]))
-    return prevDigits
+    return new_arr
 }
 
-console.log(fibonacci(6))
 
+// console.log(deepDup([[1,2],4,[5,6,7]]))
+// console.log(deepDup([[1],[2,[1,2,33]],4,5]))
